@@ -1,44 +1,43 @@
-Contains the commands you need, together with, between quotes, explanations from http://rogerdudler.github.io/git-guide/ 
+http://cmder.net/  (a better cmd prompt for windows
+
+Please find below the commands you need for adding your programs to https://github.com/prismsus/rprog.git, together with, between quotes, explanations from http://rogerdudler.github.io/git-guide/ 
+
 Remember:
 =========
-“Your local repository consists of three "trees" maintained by git. the first one is your Working Directory which holds the actual files. the second one is the Index which acts as a staging area and finally the HEAD which points to the last commit you've made.”
+“Your local repository consists of 3=three "trees" maintained by git. The first one is your Working Directory (or master) which holds the actual files. The second one is the Index which acts as a staging area and finally the HEAD which points to the last commit you've made.”
 
 
-At your terminal prompt:
-==================
-Make a dir repos 
+At your  GIT CMD prompt:
+====================
+Starting from the root directory, C:, Make a dir called repos 
 mkdir repos 
 cd repos 
 mkdir prismsus
 cd prismsus
-
-Then at your GIT CMD prompt:
+mkdir your_name
+cd  your_name
+copy \your_directory\yourfile.txt (or .R, .java, etc.)  (to your_name, current directory)
+Then also at your GIT CMD prompt:
 =======================
 echo # your_name >> README.md 
 git init 
-git add README.md 
+git add . 
 git commit -m "first commit from your_name"
 [Aside:
 touch .gitignore (To create the .gitignore file. Then iedit .gitignore to list files that you don't want git to track=include in stage area, commit, etc. Example a  gittutorials.doc if you want to keep it in a git repos without git tracking it]
 
-git clone /path/to/repository
-when using a remote server, your command will be
-git clone username@host:/path/to/repository 
-workflow
-
-In your case do:
-================
+Then do:
+========
 git remote add origin https://github.com/prismsus/rprog.git 
-push -u origin master
+git push -u origin master
 [Note. while at github.com, you can copy to clipboard the name of the current github repository: under “HTTPS clone URL” click on the icon “copy to clipboard”]
-The whole explanation for the above cmds:
+You should now see your_name, and files inside, added to https://github.com/prismsus/rprog/tree/master/prismsus
+{The http://rogerdudler.github.io/git-guide/ explanation for the above cmds:
     “1. At the top of your GitHub repository's Quick Setup page, click to copy the remote repository URL.
 1. In the Command prompt, add the URL for the remote repository where your local repository will be pushed.
 git remote add origin remote repository URL# Sets the new remote 
 git remote -v# Verifies the new remote URL
 2. Push the changes in your local repository to GitHub.
-git push origin master# Pushes the changes in your local repository up to the remote repository you specified as the origin”
-git branch your_name
-git checkout your_name
+    git push origin master # Pushes the changes in your local repository up to the remote repository you specified as the origin” }
 
 
