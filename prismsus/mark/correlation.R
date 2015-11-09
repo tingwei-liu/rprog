@@ -3,7 +3,7 @@
 corr <- function(directory, threshold = 0)
 {
   fileslist <- list.files(directory, full.names = TRUE)
-  corvec <- vector()
+  corvec <- vector() ## creates an empty vector
   for(i in 1:332)
   {
     dat <- read.csv(fileslist[i])
@@ -12,7 +12,7 @@ corr <- function(directory, threshold = 0)
     {
       nitrate <- c(dat[,3])
       sulfate <- c(dat[,2])
-      corvec<- c(corvec, cor(nitrate, sulfate, use = "complete.obs"))
+      corvec<- c(corvec, cor(nitrate, sulfate, use = "complete.obs")) ## calculate the correlation
     }
   }
   output <- corvec
