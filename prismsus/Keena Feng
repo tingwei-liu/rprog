@@ -1,0 +1,23 @@
+
+import java.util.Scanner;
+
+public class HelloWorld {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		//Right here is where I print my name
+		
+System.out.println("Hello World");
+System.out.println("I'm Keena");
+
+Scanner scan = new Scanner (System.in);
+
+String x = scan.next();
+
+System.out.print("This is what I said:");
+System.out.println(x);
+
+	}
+
+}
