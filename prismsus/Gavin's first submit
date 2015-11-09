@@ -1,0 +1,23 @@
+#LoadLibraries()
+library(ISLR)
+library(MASS)
+names(Smarket)
+dim(Smarket)
+summary(Smarket)
+pairs(Smarket)
+#Smarket=as.numeric(Smarket)
+#cor(Smarket)
+cor(Smarket [, -9])
+attach(Smarket)
+plot(Volume)
+glm.fit = glm(Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume+Today, data=Smarket, family=binomial)
+summary(glm.fit)
+glm.fit = glm(Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume, data=Smarket, family=binomial)
+summary(glm.fit)
+summary(glm.fit)$coef[, 1]
+glm.probs=predict(glm.fit, type="response")
+#glm.probs[1:10]
+glm.pred=rep("Down", 1250)
+glm.pred[glm.probs>.5]="Up"
+table(glm.pred,Direction)
+mean(glm.pred==Direction)
