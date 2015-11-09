@@ -1,0 +1,199 @@
+
+import java.util.Arrays;
+import java.util.Scanner;
+public class Matrix {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scan = new Scanner(System.in);
+		String z = "a";
+		int[][]Matrix = Input(z);
+		System.out.println("What is the calculation method you want to do with your matrix?");
+		System.out.println("(1) Matrix Multiplication\n(2) Matrix Addition\n(3) Row Addition\n(4) Column Addition\n(5) Matrix Transposition");
+		int Choice = scan.nextInt();
+		switch(Choice){
+		case 1:
+			System.out.println("Please type in the size of the second matrix you want to create.");
+			System.out.print("What is the number of rows? ");
+			int RowNumberTwo = scan.nextInt();
+			System.out.print("What is the number of columns? ");
+			int ColumnNumberTwo = scan.nextInt();
+			int[][] MatrixTwo = new int[RowNumberTwo][ColumnNumberTwo];
+			for (int d = 1; d <= RowNumberTwo; d++){
+				for (int e = 1; e <= ColumnNumberTwo; e++){
+					System.out.println("Please type in the number at row number " + d + " and column number " + e);
+					MatrixTwo[d-1][e-1] = scan.nextInt();
+				}
+			}
+			boolean x = MultiplicationPossible(Matrix, MatrixTwo);
+			if (x == true){
+				System.out.println("The result is: \n");
+				int[][]Result = MatrixMultiplication(Matrix, MatrixTwo);
+				int ResultRow = Result.length;
+				for(int []y : Result){
+					System.out.println(Arrays.toString(y));
+				}
+			}
+			else{
+				System.out.println("Sorry, these two matrices are impossible to multiply.");
+			}
+			break;
+		case 2:
+			System.out.println("Please type in the size of the second matrix you want to create.");
+			System.out.print("What is the number of rows? ");
+			int RowNumberThree = scan.nextInt();
+			System.out.print("What is the number of columns? ");
+			int ColumnNumberThree = scan.nextInt();
+			int[][] MatrixThree = new int[RowNumberThree][ColumnNumberThree];
+			for (int f = 1; f <= RowNumberThree; f++){
+				for (int g = 1; g <= ColumnNumberThree; g++){
+					System.out.println("Please type in the number at row number " + f + " and column number  " + g);
+					MatrixThree[f-1][g-1] = scan.nextInt();
+				}
+			}
+			boolean  w = AdditionPossible(Matrix, MatrixThree);
+			if (w == true){
+				System.out.println("The result is: \n");
+				int[][]ResultTwo = MatrixAddition(Matrix, MatrixThree);
+				int ResultTwoRow = ResultTwo.length;
+				for(int []v : ResultTwo){
+					System.out.println(Arrays.toString(v));
+				}
+			}
+			else {
+				System.out.println("Sorry, these two matrices are impossible to add.");
+			}
+			break;
+		case 3:
+			int[][]RowAdded = RowAddition(Matrix);
+			int RowAddedLength = RowAdded[0].length;
+			for (int n = 0; n <= RowAddedLength-1; n++){
+				System.out.println("The sum of row number " + (n+1) + " is " + RowAdded[0][n]);
+			}
+			break;
+		case 4:
+			int[][]ColumnAdded = ColumnAddition(Matrix);
+			int ColumnAddedLength = ColumnAdded[0].length;
+			for (int j = 0; j <= ColumnAddedLength-1; j++){
+				System.out.println("The sum of column number " + (j+1) + " is " + ColumnAdded[0][j]);
+			}
+			break;
+		case 5:
+			int[][]ColumnResult = MatrixTransposition(Matrix);
+			int ResultRow = ColumnResult.length;
+			for (int t = 0; t <= ResultRow-1; t++){
+				System.out.println(Arrays.toString(ColumnResult[t]));
+			}
+			break;
+		}
+		
+		
+	}
+	public static int[][]Input (String x){
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Please type in the size of the matrix you want to create.");
+		System.out.print("What is the number of rows? ");
+		int RowNumber = scan.nextInt();
+		System.out.print("What is the number of columns? ");
+		int ColumnNumber = scan.nextInt();
+		int[][] Matrix = new int[RowNumber][ColumnNumber];
+		int judge = 0;
+		while (judge == 0){
+			judge = 1;
+			for (int a = 1; a <= RowNumber; a++){
+				for (int b = 1; b <= ColumnNumber; b++){
+					System.out.println("Please type in the number at row number " + a + " and column number " + b);
+					Matrix[a-1][b-1] = scan.nextInt();
+					scan.nextLine();
+				}
+			}
+			for (int c = 1; c<= RowNumber; c++){
+				System.out.println(Arrays.toString(Matrix[c-1]));
+			}
+			System.out.println("Is this the matrix that you want to put in? (Y/N) ");
+			String Answer = scan.nextLine();
+			if (Answer.equalsIgnoreCase("N")){
+				judge = 0;
+			
+			}
+		}
+		return Matrix;
+	}
+	public static boolean MultiplicationPossible(int[][]a, int[][]b){
+		int aRowNumber = a.length;
+		int aColumnNumber = a[0].length;
+		int bRowNumber = b.length;
+		int bColumnNumber = b[0].length;
+		boolean x = (boolean)(aColumnNumber == bRowNumber);
+		return x;
+	}
+	public static int[][]MatrixMultiplication(int[][]a,int[][]b){
+		int aRowNumber = a.length;
+		int aColumnNumber = a[0].length;
+		int bRowNumber = b.length;
+		int bColumnNumber = b[0].length;
+		int[][]Result = new int[aRowNumber][bColumnNumber];
+		for (int c = 0; c <= aRowNumber-1; c++){
+			for (int d = 0; d <= bColumnNumber-1; d++){
+				for (int e = 0; e <= aColumnNumber-1; e++){
+					Result[c][d] += a[c][e] * b[e][d];
+				}
+			}
+		}
+		return Result;
+	}
+	public static boolean AdditionPossible(int[][]a,int[][]b){
+		int aRowNumber = a.length;
+		int aColumnNumber = a[0].length;
+		int bRowNumber = b.length;
+		int bColumnNumber = b[0].length;
+		boolean x = (boolean)(aColumnNumber == bColumnNumber && aRowNumber == bRowNumber);
+		return x;
+	}
+	public static int[][]MatrixAddition(int[][]a,int[][]b){
+		int aRowNumber = a.length;
+		int aColumnNumber = a[0].length;
+		int bRowNumber = b.length;
+		int bColumnNumber = b[0].length;
+		int[][]Result = new int[aRowNumber][aColumnNumber];
+		for (int c = 0; c <= aRowNumber-1; c++){
+			for (int d = 0; d <= aColumnNumber-1; d++){
+				Result[c][d] += (a[c][d] + b[c][d]);
+			}
+		}
+		return Result;
+	}
+	public static int[][]RowAddition(int[][]a){
+		int aRowNumber = a.length;
+		int aColumnNumber = a[0].length;
+		int[][]Result = new int[1][aRowNumber];
+		for (int k = 0; k <= aRowNumber-1; k++){
+			for (int g = 0; g <= aColumnNumber-1; g++){
+				Result[0][k] += a[k][g];
+			}
+		}
+		return Result;
+	}
+	public static int[][]ColumnAddition(int[][]a){
+		int aRowNumber = a.length;
+		int aColumnNumber = a[0].length;
+		int[][]Result = new int[1][aRowNumber];
+		for (int k = 0; k <= aColumnNumber-1; k++){
+			for (int g = 0; g <= aRowNumber-1; g++){
+				Result[0][k] += a[g][k];
+			}
+		}
+		return Result;
+	}
+	public static int[][]MatrixTransposition(int[][]a){
+		int aRowNumber = a.length;
+		int aColumnNumber = a[0].length;
+		int[][]Result = new int[aColumnNumber][aRowNumber];
+		for (int c = 0; c <= aRowNumber-1; c++){
+			for (int d = 0; d <= aColumnNumber-1; d++){
+				Result[d][c] = a[c][d];
+			}
+		}
+		return Result;
+	}
+}
