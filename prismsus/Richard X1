@@ -1,0 +1,27 @@
+data("airquality")
+names(airquality)
+attach(airquality)
+plot(Wind~Ozone)
+mean.Wind=mean(airquality$Wind)
+abline(h=mean.Wind)
+model1=lm(Wind~Ozone)
+abline(model1,col="blue")
+plot(model1)
+coef(model1)
+library(caret)
+set.seed(100)
+inTraining <- createDataPartition(airquality$Wind, p = .75, list = FALSE, times = 1)
+inTraining
+head(inTraining)
+train <- airquality[inTraining,]
+test <- airquality[-inTraining,]
+fitControl <- trainControl(
+  method = "cv",
+  number = 10
+)
+fit <- train(Wind ~ Ozone, data = train,
+             method = "lm",
+             trControl = fitControl,
+             verbose = FALSE)
+fit
+abline(model1)
