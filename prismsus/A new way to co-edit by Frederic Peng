@@ -1,0 +1,25 @@
+A new way to co-edit by Frederic Peng
+I found a new way to enable us to edit – in the  organization called "prismsus" (https://github.com/prismsus), one can create "teams" and  we can grant the team members writing access on certain repositories. I have created a team called "Stats2015" (https://github.com/orgs/prismsus/teams/stats2015). 
+To invite other students to the team, we can go to the link above, and click on "Add a person" in the upper-right corner. After typing in their usernames (e.g. "Avrilla"), we can invite them to this team. I invited Avrilla for testing...
+Currently, the Stats2015 team members will only have the permission to "rprog" repository, which makes sense.
+
+To update the files to github, we need to "pull" the rprog repository to our computers, update it, and "push" it back. Following are the git codes.
+
+*******************************************************
+# First, go to the repository that will contain all "rprog" files (recommendation: name it rprog too :D)
+cd .../rprog # (or some name else)
+git init # if we don't have git there yet
+
+# Pull the repository from github to the computer
+git pull https://github.com/prismsus/rprog master 
+# this doesn't need passwords; everyone can pull it
+
+# update our own files to the folder...
+
+# add & commit the changes
+git add --all
+git commit -m "blabla"
+
+# push it to github
+git push https://github.com/prismsus/rprog master
+# this requires passwords; only the team members can push it to github
